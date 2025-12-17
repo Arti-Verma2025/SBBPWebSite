@@ -539,6 +539,62 @@
         .close-modal:hover {
             color: white;
         }
+        .download-link a {
+            display: inline-block;
+            margin-top: 1rem;
+            background: #ff6b35;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.3s;
+        }
+        .logo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .logo-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.35s ease;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.08);
+            cursor: pointer;
+        }
+
+        .logo-card img {
+            max-width: 120px;
+            max-height: 80px;
+            transition: transform 0.35s ease;
+            filter: grayscale(100%);
+        }
+
+        .logo-card:hover {
+            transform: translateY(-8px) scale(1.03);
+            box-shadow: 0 14px 30px rgba(0,0,0,0.15);
+        }
+
+        .logo-card:hover img {
+            transform: scale(1.1);
+            filter: grayscale(0%);
+        }
+        .subsection-title {
+            margin-top: 50px;
+            margin-bottom: 25px;
+            font-size: 1.4rem;
+            font-weight: 600;
+            text-align: center;
+            color: #333;
+        }
+
+        .dealer-section {
+            margin-bottom: 60px;
+        }
         @media (max-width: 768px) {
             .hero h2 {
                 font-size: 2rem;
@@ -646,13 +702,11 @@
                         <li>Blow Molding</li>
                         <li>Telecom Ducts</li>
                     </ul>
-                    <div class="grades">
-                        <strong>Available Grades:</strong> PE 80, PE 100, Blow Molding, Injection (MFI: 0.2-20 g/10min)
-                    </div>
+                    <div class="download-link"><a href="https://drive.google.com/drive/folders/1cBrrWI_NXidzOg9Z2sVQ_KHZfAfnQamJ">Download TDS (PDF)</a></div>
                 </div>
                 <div class="product-card">
-                    <h3>LDPE</h3>
-                    <h4>Low-Density Polyethylene</h4>
+                    <h3>LLDPE</h3>
+                    <h4>Linear Low-Density Polyethylene</h4>
                     <p>Flexible and versatile for packaging solutions. Ideal for films and coatings with excellent processability.</p>
                     <ul>
                         <li>Films & Sheets</li>
@@ -661,9 +715,7 @@
                         <li>Coating Applications</li>
                         <li>Agricultural Films</li>
                     </ul>
-                    <div class="grades">
-                        <strong>Available Grades:</strong> Extrusion, Film (MFI: 0.3-2 g/10min), Injection
-                    </div>
+                    <div class="download-link"><a href="https://drive.google.com/drive/folders/1YuhSj3fFaEF2DhY6tKgmi_cdoyGECQid">Download TDS (PDF)</a></div>
                 </div>
                 <div class="product-card">
                     <h3>PP</h3>
@@ -676,9 +728,7 @@
                         <li>Containers & Caps</li>
                         <li>Industrial Applications</li>
                     </ul>
-                    <div class="grades">
-                        <strong>Available Grades:</strong> Homopolymer (MFI: 3-25 g/10min), Impact Copolymer, Random Copolymer
-                    </div>
+                    <div class="download-link"><a href="https://drive.google.com/drive/folders/1Utd3ZE5-ZnCRwPKIxsksi8R5GEJzwFYH">Download TDS (PDF)</a></div>
                 </div>
             </div>
         </div>
@@ -731,27 +781,37 @@
     </section>
     <section id="resources" class="resources">
         <div class="container">
-            <h2 class="section-title">Resources & Downloads</h2>
-            <div class="resources-grid">
-                <div class="resource-card">
-                    <h4>Technical Data Sheets (TDS)</h4>
-                    <p>Download detailed specifications for HDPE, LDPE, and PP grades.</p>
-                    <a href="#">Download TDS (PDF)</a>
+            <h2 class="section-title">Distributor & Dealer Network</h2>
+
+            <!-- Authorized Dealers -->
+            <div class="dealer-section">
+                <h3 class="subsection-title">Authorized Dealers</h3>
+                <div class="logo-grid">
+                    <div class="logo-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/ONGC_Logo.png" alt="ONGC Petro additions Limited">
+                    </div>
+                    <div class="logo-card">
+                        <img src="https://gailonline.com/images/gaill.png" alt="GAIL (India) Limited">
+                    </div>
                 </div>
-                <div class="resource-card">
-                    <h4>Material Safety Data Sheets (MSDS)</h4>
-                    <p>Safety information and handling guidelines for our polymers.</p>
-                    <a href="#">Download MSDS (PDF)</a>
-                </div>
-                <div class="resource-card">
-                    <h4>Case Studies</h4>
-                    <p>Real-world applications and success stories from our clients.</p>
-                    <a href="#">View Case Studies</a>
-                </div>
-                <div class="resource-card">
-                    <h4>Sustainability Report</h4>
-                    <p>Our commitment to circular economy and recycled polymers.</p>
-                    <a href="#">Download Report (PDF)</a>
+            </div>
+
+            <!-- Other Dealers -->
+            <div class="dealer-section">
+                <h3 class="subsection-title">Other Dealers</h3>
+                <div class="logo-grid">
+                    <div class="logo-card">
+                        <img src="https://www.hmel.in/wp-content/uploads/2025/02/HMEL-Logo-black.svg" alt="HMEL">
+                    </div>
+                    <div class="logo-card">
+                        <img src="https://upload.wikimedia.org/wikipedia/en/thumb/0/0e/Reliance_Industries.svg/500px-Reliance_Industries.svg.png" alt="Reliance Industries">
+                    </div>
+                    <div class="logo-card">
+                        <img src="https://iocl.com/assets/images/logo.gif" alt="IOCL">
+                    </div>
+                    <div class="logo-card">
+                        <img src="https://www.haldiapetrochemicals.com/img/logo.png" alt="Haldia Petrochemicals">
+                    </div>
                 </div>
             </div>
         </div>
@@ -772,7 +832,7 @@
                     </div>
                     <div class="contact-item">
                         <strong>Phone:</strong>
-                        <span>+91 9210366739</span>
+                        <span>+91 9210366739, +91 9711102003</span>
                     </div>
                     <div class="contact-item">
                         <strong>Address:</strong>
@@ -1027,6 +1087,7 @@
         box-shadow: 0 4px 20px rgba(37, 211, 102, 0.4);
         transition: all 0.3s;
         animation: ai-pulse 2s infinite;
+        text-decoration: none;
     }
     
     @keyframes ai-pulse {
@@ -1376,7 +1437,9 @@
 <div class="ai-chat-widget">
     <div class="ai-chat-bubble">
         <button class="ai-chat-btn" id="aiChatBtn" aria-label="Chat with us">
-            💬
+            <a href="https://wa.me/919210366739?text=Hi!+I+have+a+question+regarding+your+polymer+products.+Can+you+help+me%3F" target="_blank" style="text-decoration: none;">
+                💬
+            </a>
         </button>
         <div class="ai-notification-badge" id="aiNotificationBadge">1</div>
     </div>
@@ -1491,7 +1554,6 @@
     let aiLastTopic = null;
 
     // DOM elements
-    const aiChatBtn = document.getElementById('aiChatBtn');
     const aiChatWindow = document.getElementById('aiChatWindow');
     const aiCloseChat = document.getElementById('aiCloseChat');
     const aiChatMessages = document.getElementById('aiChatMessages');
@@ -1500,13 +1562,6 @@
     const aiQuickActions = document.getElementById('aiQuickActions');
     const aiTypingIndicator = document.getElementById('aiTypingIndicator');
     const aiNotificationBadge = document.getElementById('aiNotificationBadge');
-
-    // Toggle chat window
-    aiChatBtn.addEventListener('click', function() {
-        aiChatWindow.classList.add('ai-open');
-        aiNotificationBadge.style.display = 'none';
-        aiChatInput.focus();
-    });
 
     aiCloseChat.addEventListener('click', function() {
         aiChatWindow.classList.remove('ai-open');
