@@ -574,7 +574,6 @@
             max-width: 120px;
             max-height: 80px;
             transition: transform 0.35s ease;
-            filter: grayscale(100%);
         }
 
         .logo-card:hover {
@@ -584,7 +583,6 @@
 
         .logo-card:hover img {
             transform: scale(1.1);
-            filter: grayscale(0%);
         }
         .subsection-title {
             margin-top: 50px;
@@ -788,7 +786,7 @@
 
             <!-- Authorized Dealers -->
             <div class="dealer-section">
-                <h3 class="subsection-title">Authorized Dealers</h3>
+                <h3 class="subsection-title">Authorized Distributor</h3>
                 <div class="logo-grid">
                     <div class="logo-card">
                         <img src="https://upload.wikimedia.org/wikipedia/commons/6/6a/ONGC_Logo.png" alt="ONGC Petro additions Limited">
@@ -801,7 +799,7 @@
 
             <!-- Other Dealers -->
             <div class="dealer-section">
-                <h3 class="subsection-title">Other Dealers</h3>
+                <h3 class="subsection-title">Other brands we deal in</h3>
                 <div class="logo-grid">
                     <div class="logo-card">
                         <img src="https://www.hmel.in/wp-content/uploads/2025/02/HMEL-Logo-black.svg" alt="HMEL">
@@ -1693,60 +1691,58 @@
     async function submitForm() {
         if (submitting) return;
 
+        const status = document.getElementById('formStatus');
         submitting = true;
         document.getElementById('submitBtn').disabled = true;
 
         try {
-            const now = new Date();
-            const formattedTimestamp =
-                String(now.getDate()).padStart(2, '0') + '/' +
-                String(now.getMonth() + 1).padStart(2, '0') + '/' +
-                now.getFullYear() + ' ' +
-                String(now.getHours()).padStart(2, '0') + ':' +
-                String(now.getMinutes()).padStart(2, '0') + ':' +
-                String(now.getSeconds()).padStart(2, '0');
+        const now = new Date();
+        const formattedTimestamp =
+            String(now.getDate()).padStart(2, '0') + '/' +
+            String(now.getMonth() + 1).padStart(2, '0') + '/' +
+            now.getFullYear() + ' ' +
+            String(now.getHours()).padStart(2, '0') + ':' +
+            String(now.getMinutes()).padStart(2, '0') + ':' +
+            String(now.getSeconds()).padStart(2, '0');
 
-            const formattedData = {
-                formData: {
-                timeStamp: formattedTimestamp,
-                ...formData
-                }
-            };
+        const formattedData = {
+            formData: {
+            timeStamp: formattedTimestamp,
+            ...formData
+            }
+        };
 
-            const scriptUrl = 'https://script.google.com/macros/s/AKfycbx4h4U2bJ5anZwphbrNOpxZ7h2Xkp1sagBFOKVTGyRO0lPs3wQ9eSPP2D6OvpYNzmIz/exec';
+        const scriptUrl = 'https://script.google.com/macros/s/AKfycbx4h4U2bJ5anZwphbrNOpxZ7h2Xkp1sagBFOKVTGyRO0lPs3wQ9eSPP2D6OvpYNzmIz/exec';
 
-            await fetch(scriptUrl, {
-                method: 'POST',
-                mode: 'no-cors',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(formattedData)
-            });
+        await fetch(scriptUrl, {
+            method: 'POST',
+            mode: 'no-cors',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(formattedData)
+        });
 
-            success = true;
-            document.getElementById('formStatus').style.display = 'block';
+        success = true;
+        status.style.display = 'block';
 
-            setTimeout(() => {
-                success = false;
-                document.getElementById('formStatus').style.display = 'none';
-
-                // Reset form
-                Object.keys(formData).forEach(k => formData[k] = '');
-                document.getElementById('contactForm').reset();
-            }, 4000);
+        setTimeout(() => {
+            success = false;
+            status.style.display = 'none';
+            status.style.background = '#d4edda';
+            status.style.color = '#155724';
+            status.innerHTML = '✓ Thank you! Your message has been sent successfully. We\'ll get back to you soon.';
+            Object.keys(formData).forEach(k => formData[k] = '');
+            document.getElementById('contactForm').reset();
+        }, 4000);
 
         } catch (err) {
-            console.error(err);
-            alert('Something went wrong!');
+            showError(status);
         }
 
         submitting = false;
         document.getElementById('submitBtn').disabled = false;
     }
 
-    document.getElementById('contactForm').addEventListener('submit', function (e) {
-        e.preventDefault();
-        submitForm();
-    });
+    document.getElementById('submitBtn').addEventListener('click', submitForm);
 </script>
 </body>
 </html>
