@@ -1000,56 +1000,6 @@
                 }
             });
         });
-        // Google Apps Script form submission
-        // document.getElementById('contactForm').addEventListener('submit', function(e) {
-        //     e.preventDefault();
-        //     const form = e.target;
-        //     const status = document.getElementById('formStatus');
-        //     const submitBtn = form.querySelector('.submit-btn');
-        //     // Get form values
-        //     const name = document.getElementById('name').value;
-        //     const email = document.getElementById('email').value;
-        //     const phone = document.getElementById('phone').value;
-        //     const company = document.getElementById('company').value;
-        //     const message = document.getElementById('message').value;
-        //     // Google Apps Script Web App URL
-        //     const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx4h4U2bJ5anZwphbrNOpxZ7h2Xkp1sagBFOKVTGyRO0lPs3wQ9eSPP2D6OvpYNzmIz/exec';
-        //     // Disable submit button
-        //     submitBtn.disabled = true;
-        //     submitBtn.textContent = 'Sending...';
-        //     status.style.display = 'none';
-        //     // Create FormData
-        //     const formData = new FormData();
-        //     formData.append('name', name);
-        //     formData.append('email', email);
-        //     formData.append('phone', phone);
-        //     formData.append('company', company);
-        //     formData.append('message', message);
-        //     // Send to Google Apps Script
-        //     fetch(SCRIPT_URL, {
-        //         method: 'POST',
-        //         body: formData,
-        //         mode: 'no-cors'
-        //     })
-        //     .then(() => {
-        //         // With no-cors, we can't read the response
-        //         // But if we're here, the request was sent
-        //         status.style.display = 'block';
-        //         status.style.background = '#d4edda';
-        //         status.style.color = '#155724';
-        //         status.innerHTML = '✓ Thank you! Your message has been sent successfully. We\'ll get back to you soon.';
-        //         form.reset();
-        //         gtag('event', 'form_submit', { 'event_category': 'Contact', 'event_label': 'Success' });
-        //     })
-        //     .catch(() => {
-        //         showError(status);
-        //         gtag('event', 'form_submit', { 'event_category': 'Contact', 'event_label': 'Error' });
-        //     })
-        //     .finally(() => {
-        //         submitBtn.disabled = false;
-        //         submitBtn.textContent = 'Send Message';
-        //     });
-        // });
         function showError(status) {
             status.style.display = 'block';
             status.style.background = '#f8d7da';
@@ -1721,79 +1671,82 @@
 })();
 </script>
 <script>
-  const formData = {
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    message: ''
-  };
+    const formData = {
+        name: '',
+        email: '',
+        phone: '',
+        company: '',
+        message: ''
+    };
 
-  let submitting = false;
-  let success = false;
+    let submitting = false;
+    let success = false;
 
-  function handleChange(e) {
-    const { id, value } = e.target;
-    formData[id] = value;
-  }
-
-  document.querySelectorAll('#contactForm input, #contactForm textarea')
-    .forEach(el => el.addEventListener('input', handleChange));
-
-  async function submitForm() {
-    if (submitting) return;
-
-    submitting = true;
-    document.getElementById('submitBtn').disabled = true;
-
-    try {
-      const now = new Date();
-      const formattedTimestamp =
-        String(now.getDate()).padStart(2, '0') + '/' +
-        String(now.getMonth() + 1).padStart(2, '0') + '/' +
-        now.getFullYear() + ' ' +
-        String(now.getHours()).padStart(2, '0') + ':' +
-        String(now.getMinutes()).padStart(2, '0') + ':' +
-        String(now.getSeconds()).padStart(2, '0');
-
-      const formattedData = {
-        formData: {
-          timeStamp: formattedTimestamp,
-          ...formData
-        }
-      };
-
-      const scriptUrl = 'https://script.google.com/macros/s/AKfycbx4h4U2bJ5anZwphbrNOpxZ7h2Xkp1sagBFOKVTGyRO0lPs3wQ9eSPP2D6OvpYNzmIz/exec';
-
-      await fetch(scriptUrl, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formattedData)
-      });
-
-      success = true;
-      document.getElementById('successMsg').style.display = 'block';
-
-      setTimeout(() => {
-        success = false;
-        document.getElementById('successMsg').style.display = 'none';
-
-        // Reset form
-        Object.keys(formData).forEach(k => formData[k] = '');
-        document.getElementById('contactForm').reset();
-      }, 4000);
-
-    } catch (err) {
-      console.error(err);
-      alert('Something went wrong!');
+    function handleChange(e) {
+        const { id, value } = e.target;
+        formData[id] = value;
     }
 
-    submitting = false;
-    document.getElementById('submitBtn').disabled = false;
-  }
+    document.querySelectorAll('#contactForm input, #contactForm textarea')
+        .forEach(el => el.addEventListener('input', handleChange));
 
-  document.getElementById('submitBtn').addEventListener('click', submitForm);
+    async function submitForm() {
+        if (submitting) return;
+
+        submitting = true;
+        document.getElementById('submitBtn').disabled = true;
+
+        try {
+            const now = new Date();
+            const formattedTimestamp =
+                String(now.getDate()).padStart(2, '0') + '/' +
+                String(now.getMonth() + 1).padStart(2, '0') + '/' +
+                now.getFullYear() + ' ' +
+                String(now.getHours()).padStart(2, '0') + ':' +
+                String(now.getMinutes()).padStart(2, '0') + ':' +
+                String(now.getSeconds()).padStart(2, '0');
+
+            const formattedData = {
+                formData: {
+                timeStamp: formattedTimestamp,
+                ...formData
+                }
+            };
+
+            const scriptUrl = 'https://script.google.com/macros/s/AKfycbx4h4U2bJ5anZwphbrNOpxZ7h2Xkp1sagBFOKVTGyRO0lPs3wQ9eSPP2D6OvpYNzmIz/exec';
+
+            await fetch(scriptUrl, {
+                method: 'POST',
+                mode: 'no-cors',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(formattedData)
+            });
+
+            success = true;
+            document.getElementById('formStatus').style.display = 'block';
+
+            setTimeout(() => {
+                success = false;
+                document.getElementById('formStatus').style.display = 'none';
+
+                // Reset form
+                Object.keys(formData).forEach(k => formData[k] = '');
+                document.getElementById('contactForm').reset();
+            }, 4000);
+
+        } catch (err) {
+            console.error(err);
+            alert('Something went wrong!');
+        }
+
+        submitting = false;
+        document.getElementById('submitBtn').disabled = false;
+    }
+
+    document.getElementById('contactForm').addEventListener('submit', function (e) {
+        e.preventDefault();
+        submitForm();
+    });
 </script>
 </body>
 </html>
